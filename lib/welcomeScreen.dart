@@ -90,7 +90,8 @@ class MyApp extends StatelessWidget {
                   width: 300,
                   height: 40,
                   decoration: BoxDecoration(
-                    color: Colors.blueAccent, // Use a contrasting color
+                    color: const Color.fromARGB(
+                        255, 173, 131, 115), // Use a contrasting color
                     borderRadius: BorderRadius.circular(15),
                   ),
                   child: ElevatedButton(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:task_management_app/libraryScreen.dart';
 
 class SignupPage extends StatefulWidget {
@@ -31,11 +32,10 @@ class _SignupPageState extends State<SignupPage> {
                       children: [
                         Text(
                           'Sign up',
-                          style: TextStyle(
-                            fontSize: 30,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                          ),
+                          style: GoogleFonts.ptSerif(
+                              textStyle: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 16)),
+                          textAlign: TextAlign.center,
                         ),
                         SizedBox(height: 20),
                       ],
@@ -61,10 +61,9 @@ class _SignupPageState extends State<SignupPage> {
                         children: [
                           Text(
                             'Create an Account 😊',
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                            ),
+                            style: GoogleFonts.ptSerif(
+                                textStyle: TextStyle(
+                                    fontWeight: FontWeight.bold, fontSize: 16)),
                             textAlign: TextAlign.center,
                           ),
                           SizedBox(height: 20),

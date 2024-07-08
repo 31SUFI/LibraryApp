@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:task_management_app/Signup.dart';
 import 'package:task_management_app/libraryScreen.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -8,6 +9,8 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  bool isExpanded = false; // Track the state of the container
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,14 +33,7 @@ class _LoginPageState extends State<LoginPage> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text(
-                          'Login ',
-                          style: TextStyle(
-                            fontSize: 30,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                          ),
-                        ),
+                        Text('Login ', style: GoogleFonts.merriweather()),
                         SizedBox(height: 20),
                       ],
                     ),
@@ -45,7 +41,11 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 Expanded(
                   flex: 2,
-                  child: Container(
+                  child: AnimatedContainer(
+                    duration: Duration(milliseconds: 500), // Animation duration
+                    curve: Curves.easeInOut, // Animation curve
+                    height:
+                        isExpanded ? 400 : 200, // Change height based on state
                     width: double.infinity,
                     decoration: BoxDecoration(
                       color: Colors.white,
@@ -62,8 +62,9 @@ class _LoginPageState extends State<LoginPage> {
                         children: [
                           Text(
                             'Welcome 😍,\n Please Sign in to continue',
-                            style: TextStyle(
-                                fontSize: 18, fontWeight: FontWeight.bold),
+                            style: GoogleFonts.ptSerif(
+                                textStyle: TextStyle(
+                                    fontWeight: FontWeight.bold, fontSize: 16)),
                             textAlign: TextAlign.center,
                           ),
                           SizedBox(height: 20),
@@ -125,20 +126,17 @@ class _LoginPageState extends State<LoginPage> {
                                 borderRadius: BorderRadius.circular(10.0),
                               ),
                               backgroundColor: Color.fromARGB(193, 158, 56, 56),
-// Button color
                               padding: EdgeInsets.symmetric(
                                 horizontal: 100.0,
-                                vertical:
-                                    15.0, // Adjust vertical padding for better visibility
+                                vertical: 15.0,
                               ),
                             ),
                             child: Text(
                               'Sign in',
                               style: TextStyle(
                                 fontSize: 15,
-                                fontWeight: FontWeight.bold, // Make text bold
-                                color: Colors
-                                    .white, // Ensure text is white for better contrast
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
                               ),
                             ),
                           ),

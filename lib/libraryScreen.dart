@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'BookDetails.dart';
+//import 'book_details.dart';
+import 'flip_book_card.dart';
 
 class LibraryScreen extends StatefulWidget {
   @override
@@ -9,17 +10,59 @@ class LibraryScreen extends StatefulWidget {
 class _LibraryScreenState extends State<LibraryScreen> {
   final List<Map<String, dynamic>> books = [
     {
-      'title': 'The Lord of the Rings',
-      'author': 'J.R.R. Tolkien',
-      'imageUrl': 'assets/images/lor.jpeg', // Replace with actual image path
+      'title': 'The Hitchhiker\'s Guide to the Galaxy',
+      'author': 'Douglas Adams',
+      'imageUrl':
+          'assets/images/HitchhikersGuide.jpeg', // Replace with actual image path
+      'Category': 'Science Fiction',
+      'Rating': '4.5 Stars',
     },
     {
       'title': 'Harry Potter and the Philosopher’s Stone',
       'author': 'J.K. Rowling',
       'imageUrl':
           'assets/images/HarryPotter.jpeg', // Replace with actual image path
+      'Category': 'Fantasy ',
+      'Rating': '4 Stars',
     },
-    // Add more books here
+    {
+      'title': 'To Kill a Mockingbird',
+      'author': 'Harper Lee',
+      'imageUrl':
+          'assets/images/ToKillAMockingbird.jpeg', // Replace with actual image path
+      'Category': 'Fiction',
+      'Rating': '4.5 Stars',
+    },
+    {
+      'title': '1984',
+      'author': 'George Orwell',
+      'imageUrl': 'assets/images/1984.jpeg', // Replace with actual image path
+      'Category': 'Dystopian Fiction',
+      'Rating': '4 Stars',
+    },
+    {
+      'title': 'Pride and Prejudice',
+      'author': 'Jane Austen',
+      'imageUrl':
+          'assets/images/PrideAndPrejudice.jpeg', // Replace with actual image path
+      'Category': 'Romance',
+      'Rating': '4.5 Stars',
+    },
+    {
+      'title': 'The Catcher in the Rye',
+      'author': 'J.D. Salinger',
+      'imageUrl':
+          'assets/images/TheCatcherInTheRye.jpeg', // Replace with actual image path
+      'Category': 'Coming-of-Age Fiction',
+      'Rating': '4 Stars',
+    },
+    {
+      'title': 'The Lord of the Rings',
+      'author': 'J.R.R. Tolkien',
+      'imageUrl': 'assets/images/lor.jpeg', // Replace with actual image path
+      'Category': 'Mystery , Fantasy',
+      'Rating': '5 Stars',
+    },
   ];
 
   List<Map<String, dynamic>> filteredBooks = [];
@@ -34,14 +77,13 @@ class _LibraryScreenState extends State<LibraryScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color.fromRGBO(255, 255, 255, 1),
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(kToolbarHeight),
         child: AppBar(
-          //automaticallyImplyLeading: false, // Remove the back arrow
           titleSpacing: 0,
           title: Padding(
-            padding: const EdgeInsets.only(
-                right: 10.0, left: 150), // Align search bar to the left
+            padding: const EdgeInsets.only(right: 10.0, left: 150),
             child: TextField(
               onChanged: (value) {
                 setState(() {
@@ -91,68 +133,7 @@ class _LibraryScreenState extends State<LibraryScreen> {
               itemCount: filteredBooks.length,
               itemBuilder: (context, index) {
                 final book = filteredBooks[index];
-                return GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => BookDetailsScreen(book: book),
-                      ),
-                    );
-                  },
-                  child: Hero(
-                    tag: book['title'], // Use a unique tag for each book
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          border: Border.all(
-                              color: const Color.fromARGB(255, 8, 8, 8)),
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: [
-                            Container(
-                              height: 150,
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.vertical(
-                                    top: Radius.circular(10)),
-                                child: Image.asset(
-                                  book['imageUrl'],
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    book['title'],
-                                    style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                  SizedBox(height: 4),
-                                  Text(
-                                    'By ${book['author']}',
-                                    style: TextStyle(
-                                      fontSize: 14,
-                                      color: Colors.pinkAccent,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                );
+                return FlipBookCard(book: book);
               },
             ),
           ),
