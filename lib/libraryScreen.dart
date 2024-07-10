@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 //import 'book_details.dart';
 import 'flip_book_card.dart';
 
@@ -79,43 +80,70 @@ class _LibraryScreenState extends State<LibraryScreen> {
     return Scaffold(
       backgroundColor: const Color.fromRGBO(255, 255, 255, 1),
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(kToolbarHeight),
+        preferredSize: Size.fromHeight(kToolbarHeight * 2),
         child: AppBar(
-          titleSpacing: 0,
-          title: Padding(
-            padding: const EdgeInsets.only(right: 10.0, left: 150),
-            child: TextField(
-              onChanged: (value) {
-                setState(() {
-                  searchQuery = value;
-                  filteredBooks = books
-                      .where((book) => book['title']
-                          .toLowerCase()
-                          .contains(searchQuery.toLowerCase()))
-                      .toList();
-                });
-              },
-              decoration: InputDecoration(
-                hintText: 'Search books',
-                suffixIcon: Icon(Icons.search, color: Colors.blueAccent),
-                contentPadding:
-                    EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
-                filled: true,
-                fillColor: Colors.white,
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(30.0)),
-                  borderSide: BorderSide.none,
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(30.0)),
-                  borderSide: BorderSide(color: Colors.black, width: 1.0),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(30.0)),
-                  borderSide: BorderSide(color: Colors.black, width: 1.0),
+          automaticallyImplyLeading: false,
+          flexibleSpace: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(left: 20.0),
+                    child: Text(
+                      'Book Manager',
+                      style: GoogleFonts.ptSerif(
+                          textStyle: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 24)),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                  IconButton(
+                    icon: Icon(Icons.favorite),
+                    onPressed: () {
+                      // Handle liked button press
+                    },
+                  ),
+                ],
+              ),
+              Padding(
+                padding: const EdgeInsets.only(
+                    right: 10.0, left: 10.0, bottom: 10.0),
+                child: TextField(
+                  onChanged: (value) {
+                    setState(() {
+                      searchQuery = value;
+                      filteredBooks = books
+                          .where((book) => book['title']
+                              .toLowerCase()
+                              .contains(searchQuery.toLowerCase()))
+                          .toList();
+                    });
+                  },
+                  decoration: InputDecoration(
+                    hintText: 'Search books',
+                    suffixIcon: Icon(Icons.search, color: Colors.blueAccent),
+                    contentPadding:
+                        EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+                    filled: true,
+                    fillColor: Colors.white,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(30.0)),
+                      borderSide: BorderSide.none,
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(30.0)),
+                      borderSide: BorderSide(color: Colors.black, width: 1.0),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(30.0)),
+                      borderSide: BorderSide(color: Colors.black, width: 1.0),
+                    ),
+                  ),
                 ),
               ),
-            ),
+            ],
           ),
         ),
       ),
