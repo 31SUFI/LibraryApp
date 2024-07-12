@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "396958759167",
+    "project_id": "libraryapp-3bfac",
+    "storage_bucket": "libraryapp-3bfac.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:396958759167:android:7e6d6c555268374d06f4ca",
+        "android_client_info": {
+          "package_name": "com.example.task_management_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC4EhDTmDOTIMDSdej8i6mRnG1MeeeXPO8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
