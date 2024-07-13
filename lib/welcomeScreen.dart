@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:task_management_app/Signup.dart';
+
 import 'package:task_management_app/Login.dart';
+import 'package:task_management_app/Signup.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -69,7 +70,7 @@ class MyApp extends StatelessWidget {
                   child: ElevatedButton(
                     onPressed: () {
                       Navigator.of(context).push(
-                        MaterialPageRoute(builder: (context) => LoginPage()),
+                        MaterialPageRoute(builder: (context) => SignInScreen()),
                       );
                     },
                     style: ElevatedButton.styleFrom(
@@ -97,7 +98,7 @@ class MyApp extends StatelessWidget {
                   child: ElevatedButton(
                     onPressed: () {
                       Navigator.of(context).push(
-                        MaterialPageRoute(builder: (context) => SignupPage()),
+                        MaterialPageRoute(builder: (context) => SignUpScreen()),
                       );
                     },
                     style: ElevatedButton.styleFrom(

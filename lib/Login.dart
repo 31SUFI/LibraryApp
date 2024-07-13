@@ -1,155 +1,230 @@
 import 'package:flutter/material.dart';
 import 'package:task_management_app/Signup.dart';
 import 'package:task_management_app/libraryScreen.dart';
-import 'package:google_fonts/google_fonts.dart';
+//import 'package:google_fonts/google_fonts.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
-class LoginPage extends StatefulWidget {
+class SignInScreen extends StatefulWidget {
   @override
-  _LoginPageState createState() => _LoginPageState();
+  _SignInScreenState createState() => _SignInScreenState();
 }
 
-class _LoginPageState extends State<LoginPage> {
-  bool isExpanded = false; // Track the state of the container
+class _SignInScreenState extends State<SignInScreen> {
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+  bool _isPasswordVisible = false;
+  bool _isChecked = false;
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Stack(
-          children: [
-            // Background Image
-            Positioned.fill(
-              child: Image.asset(
-                'assets/images/library.png', // Replace with your image path
-                fit: BoxFit.cover,
+      backgroundColor: Colors.white,
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(height: 60),
+              Text(
+                'Welcome',
+                style: TextStyle(
+                  fontSize: 32,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                ),
               ),
-            ),
-            // Main Content
-            Column(
-              children: [
-                Expanded(
-                  flex: 1,
-                  child: Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text('Login ', style: GoogleFonts.merriweather()),
-                        SizedBox(height: 20),
-                      ],
-                    ),
+              Text(
+                'back!',
+                style: TextStyle(
+                  fontSize: 32,
+                  color: Colors.black,
+                ),
+              ),
+              SizedBox(height: 16),
+              Text(
+                'Sign in to access your package history and get real-time updates on all your shipments',
+                style: TextStyle(color: Colors.brown),
+              ),
+              SizedBox(height: 32),
+              TextField(
+                controller: _emailController,
+                decoration: InputDecoration(
+                  filled: true,
+                  fillColor: Colors.grey[200],
+                  prefixIcon: Icon(Icons.mail),
+                  hintText: 'Enter your email',
+                  hintStyle: TextStyle(color: Colors.grey),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8.0),
+                    borderSide: BorderSide.none,
                   ),
                 ),
-                Expanded(
-                  flex: 2,
-                  child: AnimatedContainer(
-                    duration: Duration(milliseconds: 500), // Animation duration
-                    curve: Curves.easeInOut, // Animation curve
-                    height:
-                        isExpanded ? 400 : 200, // Change height based on state
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(30.0),
-                        topRight: Radius.circular(30.0),
-                      ),
+              ),
+              SizedBox(height: 16),
+              TextField(
+                controller: _passwordController,
+                obscureText: !_isPasswordVisible,
+                decoration: InputDecoration(
+                  filled: true,
+                  fillColor: Colors.grey[200],
+                  prefixIcon: Icon(Icons.lock),
+                  hintText: 'Enter your password',
+                  hintStyle: TextStyle(color: Colors.grey),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8.0),
+                    borderSide: BorderSide.none,
+                  ),
+                  suffixIcon: IconButton(
+                    icon: Icon(
+                      _isPasswordVisible
+                          ? Icons.visibility
+                          : Icons.visibility_off,
                     ),
-                    padding: EdgeInsets.all(20.0),
-                    child: SingleChildScrollView(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text(
-                            'Welcome 😍,\n Please Sign in to continue',
-                            style: GoogleFonts.ptSerif(
-                                textStyle: TextStyle(
-                                    fontWeight: FontWeight.bold, fontSize: 16)),
-                            textAlign: TextAlign.center,
-                          ),
-                          SizedBox(height: 20),
-                          TextField(
-                            decoration: InputDecoration(
-                              labelText: 'Enter Email',
-                              suffixIcon: Icon(Icons.check),
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10.0),
-                              ),
-                            ),
-                          ),
-                          SizedBox(height: 20),
-                          TextField(
-                            obscureText: true,
-                            decoration: InputDecoration(
-                              labelText: 'Password',
-                              suffixIcon: Icon(Icons.visibility),
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10.0),
-                              ),
-                            ),
-                          ),
-                          SizedBox(height: 10),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Row(
-                                children: [
-                                  Checkbox(value: true, onChanged: (value) {}),
-                                  Text('Remember me'),
-                                ],
-                              ),
-                              TextButton(
-                                onPressed: () {
-                                  Navigator.of(context).push(
-                                    MaterialPageRoute(
-                                        builder: (context) => SignupPage()),
-                                  );
-                                },
-                                child: Text(
-                                  ' Sign up here',
-                                  style: TextStyle(color: Colors.brown),
-                                  selectionColor: Colors.black,
-                                ),
-                              ),
-                            ],
-                          ),
-                          SizedBox(height: 20),
-                          ElevatedButton(
-                            onPressed: () {
-                              Navigator.of(context).push(
-                                MaterialPageRoute(
-                                    builder: (context) => LibraryScreen()),
-                              );
-                            },
-                            style: ElevatedButton.styleFrom(
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10.0),
-                              ),
-                              backgroundColor: Color.fromARGB(193, 158, 56, 56),
-                              padding: EdgeInsets.symmetric(
-                                horizontal: 100.0,
-                                vertical: 15.0,
-                              ),
-                            ),
-                            child: Text(
-                              'Sign in',
-                              style: TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
+                    onPressed: () {
+                      setState(() {
+                        _isPasswordVisible = !_isPasswordVisible;
+                      });
+                    },
                   ),
                 ),
-              ],
-            ),
-          ],
+              ),
+              SizedBox(height: 8),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    children: [
+                      Checkbox(
+                        value: _isChecked,
+                        onChanged: (value) {
+                          setState(() {
+                            _isChecked = value!;
+                          });
+                        },
+                      ),
+                      Text('Remember me'),
+                    ],
+                  ),
+                  TextButton(
+                    onPressed: () {},
+                    child: Text(
+                      'Forgot password?',
+                      style: TextStyle(color: Colors.brown),
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: 16),
+              ElevatedButton(
+                onPressed: _signInWithEmailAndPassword,
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.brown,
+                  minimumSize: Size(double.infinity, 50),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8.0),
+                  ),
+                ),
+                child: Text(
+                  'Sign in',
+                  style: TextStyle(fontSize: 18, color: Colors.white),
+                ),
+              ),
+              SizedBox(height: 16),
+              Center(
+                  child: Text(
+                'Or',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              )),
+              SizedBox(height: 16),
+              ElevatedButton.icon(
+                onPressed: () {},
+                icon: Icon(Icons.account_circle),
+                label: Text('Continue with Google'),
+                style: ElevatedButton.styleFrom(
+                  foregroundColor: Colors.brown,
+                  backgroundColor: Colors.white,
+                  side: BorderSide(color: Colors.brown),
+                  minimumSize: Size(double.infinity, 50),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8.0),
+                  ),
+                ),
+              ),
+              SizedBox(height: 16),
+              Center(
+                child: TextButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => SignUpScreen()),
+                    );
+                  },
+                  child: Text(
+                    "Don't have an account? Create an account",
+                    style: TextStyle(color: Colors.brown),
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
+  }
+
+  Future<void> _signInWithEmailAndPassword() async {
+    try {
+      // ignore: unused_local_variable
+      UserCredential userCredential =
+          await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: _emailController.text.trim(),
+        password: _passwordController.text.trim(),
+      );
+
+      // Sign-in successful
+      // ignore: use_build_context_synchronously
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Sign in successful'),
+        ),
+      );
+
+      // Navigate to the next screen
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => LibraryScreen()),
+      );
+    } on FirebaseAuthException catch (e) {
+      // Handle sign-in errors
+      String message = 'Error: ${e.message}';
+      if (e.code == 'user-not-found') {
+        message = 'No user found for that email.';
+      } else if (e.code == 'wrong-password') {
+        message = 'Wrong password provided.';
+      }
+
+      // ignore: use_build_context_synchronously
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(message),
+        ),
+      );
+    } catch (e) {
+      // Handle any other errors
+      // ignore: use_build_context_synchronously
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Error: ${e.toString()}'),
+        ),
+      );
+    }
   }
 }
